@@ -1,0 +1,46 @@
+{
+  "name": "@airewards/cli-wrapper",
+  "version": "0.1.2",
+  "description": "Universal terminal proxy: wrap any CLI AI agent to earn AIRewards while it thinks.",
+  "type": "module",
+  "bin": {
+    "airewards": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "assets",
+    "scripts",
+    "README.md"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airewards/cli-wrapper"
+  },
+  "bugs": {
+    "url": "https://github.com/airewards/cli-wrapper/issues"
+  },
+  "homepage": "https://www.airewards.tech",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && chmod +x dist/index.js",
+    "postinstall": "node scripts/ensure-pty-helper.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "node-pty": "^1.1.0"
+  }
+}
