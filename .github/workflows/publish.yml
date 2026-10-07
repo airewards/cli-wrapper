@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish Package
 
 on:
   push:
@@ -19,9 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@airewards'
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -30,6 +28,17 @@ jobs:
         run: npm run build
 
       - name: Publish to GitHub Packages
-        run: npm publish --registry=https://npm.pkg.github.com
+        run: |
+          echo "@airewards:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
+          npm publish --registry=https://npm.pkg.github.com || echo "Notice: Version already published to GitHub Packages or publish skipped."
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to npmjs.org (if NPM_TOKEN is provided)
+        if: env.NPM_TOKEN != ''
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+          npm publish --access public || echo "Notice: Version already published to npmjs.org or publish skipped."
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
