@@ -1,6 +1,6 @@
 {
   "name": "@airewards/cli-wrapper",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Universal terminal proxy: wrap any CLI AI agent to earn AIRewards while it thinks.",
   "type": "module",
   "bin": {
