@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airewards/cli-wrapper"
+    "url": "git+https://github.com/airewards/cli-wrapper.git"
   },
   "bugs": {
     "url": "https://github.com/airewards/cli-wrapper/issues"
